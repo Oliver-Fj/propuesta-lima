@@ -1,4 +1,4 @@
-/* Renderizado de las secciones de la propuesta, calculadora de presupuesto, retorno de la inversión y aprobación. */
+/* Renderizado de las secciones de la propuesta, calculadora de presupuesto y aprobación. */
 "use strict";
 
 /* ====== hero grano ====== */
@@ -166,7 +166,6 @@ function calc() {
   $("#tMonth").textContent = money(monT) + "/mes";
   $("#tFirst").textContent = money(first);
   $("#tNext").textContent = money(CALC.next) + "/año";
-  roi();
   approveSum();
 }
 $("#presupuesto").addEventListener("input", calc);
@@ -193,54 +192,15 @@ $$("table.stack").forEach((t) => {
 });
 
 /* ====== cronograma ====== */
+const GWEEKS = Math.ceil(GMAX / 5);
+$("#gantt").style.setProperty("--wk", GWEEKS);
 
 $("#gantt").innerHTML =
-  `<div></div><div class="axis">${[1, 2, 3, 4, 5, 6].map((n) => `<span>Sem. ${n}</span>`).join("")}</div>` +
+  `<div></div><div class="axis">${Array.from({ length: GWEEKS }, (_, i) => `<span>Sem. ${i + 1}</span>`).join("")}</div>` +
   GANTT.map(
     (g, i) =>
       `<div class="lbl"><i>${String(i + 1).padStart(2, "0")}</i><span>${g[0]}<em class="dd"> · ${g[2]} d</em></span></div><div class="trk"><div class="bar ${g[3] === "cl" ? "cl" : g[3] === "both" ? "both" : ""}" style="left:${(g[1] / GMAX) * 100}%;width:${(g[2] / GMAX) * 100}%">${g[2]} d</div></div>`
   ).join("");
-
-/* ====== ROI ====== */
-
-$("#roiInputs").innerHTML = RI.map(
-  (r) =>
-    `<div class="sl"><div class="top"><label for="ri_${r.k}">${r.label}</label><output id="ro_${r.k}">${r.f(r.v)}</output></div><input type="range" id="ri_${r.k}" min="${r.min}" max="${r.max}" step="${r.step}" value="${r.v}"></div>`
-).join("");
-$("#roiInputs").addEventListener("input", roi);
-function roi() {
-  const g = (k) => +$("#ri_" + k).value;
-  RI.forEach((r) => ($("#ro_" + r.k).textContent = r.f(g(r.k))));
-  const sales = (g("q") * g("c")) / 100,
-    ingresos = sales * g("t") * 12,
-    margen = (ingresos * g("m")) / 100,
-    ahorro = g("h") * g("w") * 12;
-  const ben = margen + ahorro,
-    cost = CALC.first || 0,
-    net = ben - cost,
-    pct = cost ? (net / cost) * 100 : 0;
-  const el = $("#roiPct");
-  el.textContent = (pct > 0 ? "+" : "") + Math.round(pct) + " %";
-  el.className = pct >= 0 ? "pos" : "neg";
-  const mx = Math.max(ben, cost, 1);
-  $("#barCost").style.width = (cost / mx) * 100 + "%";
-  $("#barCost").textContent = money(cost);
-  $("#barBen").style.width = (ben / mx) * 100 + "%";
-  $("#barBen").textContent = money(ben);
-  $("#roiKv").innerHTML =
-    `<span>Ventas atribuibles al mes</span><b>${sales.toFixed(1)}</b><span>Ingresos atribuibles al año</span><b>${money(ingresos)}</b><span>Ganancia (margen) al año</span><b>${money(margen)}</b><span>Ahorro de tiempo al año</span><b>${money(ahorro)}</b><span>Resultado neto primer año</span><b>${money(net)}</b>`;
-  const perSale = (g("t") * g("m")) / 100;
-  $("#roiBE").textContent =
-    perSale > 0
-      ? `Cada venta deja ${money(perSale)} de margen: el costo del primer año se cubriría con unas ${Math.ceil(cost / perSale)} ventas atribuibles a la web en el año, sin contar el ahorro de tiempo.`
-      : "";
-}
-
-/* ====== condiciones ====== */
-
-$("#condList").innerHTML = COND.map(
-  (c) => `<div><b>${c[0]}</b><p>${c[1]}</p><span><span class="ph">${c[2]}</span></span></div>`
-).join("");
 
 /* ====== aprobación ====== */
 function approveSum() {
@@ -266,7 +226,9 @@ Mensual: ${money(CALC.monT)}
 Total primer año: ${money(CALC.first)}
 ${v("aCom") ? "\nComentarios: " + v("aCom") + "\n" : ""}
 Fecha: ${new Date().toLocaleDateString("es-PE")}
-Acepto la propuesta: ____________________`;
+Acepto la propuesta: ____________________
+
+Propuesta presentada por ${CONFIG.profesional} · ${CONFIG.profesionalUrl}`;
   const wa = $("#aWa");
   if (CONFIG.miWhatsapp) {
     wa.href =

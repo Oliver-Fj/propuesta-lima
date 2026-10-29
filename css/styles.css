@@ -1294,7 +1294,11 @@ details.more > div {
 .gantt .trk {
   position: relative;
   height: 30px;
-  background: repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px calc(100% / 6));
+  background: repeating-linear-gradient(
+    90deg,
+    var(--rule) 0 1px,
+    transparent 1px calc(100% / var(--wk, 8))
+  );
 }
 .gantt .bar {
   position: absolute;
@@ -1326,7 +1330,7 @@ details.more > div {
 .gantt .axis {
   grid-column: 2;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(var(--wk, 8), 1fr);
   font-family: var(--f-mono);
   font-size: 0.72rem;
   color: var(--ink-2);
@@ -1400,167 +1404,6 @@ details.more > div {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-}
-
-/* ROI */
-.roi {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 24px;
-  align-items: start;
-}
-@media (max-width: 880px) {
-  .roi {
-    grid-template-columns: 1fr;
-  }
-}
-.sl {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--rule);
-}
-.sl .top {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  font-size: 0.92rem;
-}
-.sl output {
-  font-family: var(--f-mono);
-  font-weight: 500;
-}
-.sl input {
-  width: 100%;
-  accent-color: var(--wood);
-}
-.roi-out {
-  background: var(--card);
-  border: 1.5px solid var(--ink);
-  border-radius: 12px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.roi-big {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.roi-big b {
-  font-family: var(--f-display);
-  font-size: 4rem;
-  line-height: 0.9;
-  font-weight: 700;
-}
-.roi-big b.neg {
-  color: var(--warn);
-}
-.roi-big b.pos {
-  color: var(--good);
-}
-.bars {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.bars .row {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 10px;
-  align-items: center;
-  font-size: 0.85rem;
-}
-.bars .tr {
-  background: var(--paper-2);
-  border-radius: 5px;
-  height: 26px;
-  position: relative;
-  overflow: hidden;
-}
-.bars .fill {
-  height: 100%;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 8px;
-  font-family: var(--f-mono);
-  font-size: 0.75rem;
-  color: #fff;
-  min-width: fit-content;
-  transition: width 0.25s ease;
-}
-.bars .fill.cost {
-  background: var(--ink-2);
-}
-.bars .fill.ben {
-  background: var(--good);
-}
-.kv {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 6px 14px;
-  font-size: 0.9rem;
-}
-.kv span {
-  color: var(--ink-2);
-}
-.kv b {
-  font-family: var(--f-mono);
-  font-weight: 500;
-  text-align: right;
-}
-
-/* Condiciones */
-.cond {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
-  gap: 0 28px;
-}
-.cond > div {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--rule);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.cond b {
-  font-size: 0.95rem;
-}
-.cond p {
-  font-size: 0.9rem;
-  color: var(--ink-2);
-}
-.deliver {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-  gap: 12px;
-}
-.deliver div {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 10px;
-  padding: 14px;
-  font-size: 0.93rem;
-}
-.deliver div::before {
-  content: "";
-  flex: none;
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--wood);
-  border-radius: 3px;
-  margin-top: 5px;
-}
-.deliver .opt-d {
-  color: var(--ink-2);
 }
 
 /* Aprobación */
@@ -1742,9 +1585,6 @@ footer.end .wrap {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: var(--ink-2);
-  }
-  .roi-big b {
-    font-size: 3.2rem;
   }
   .spec {
     padding: 4px 14px;

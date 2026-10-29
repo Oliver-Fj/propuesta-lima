@@ -1,4 +1,4 @@
-/* Contenido de la propuesta: textos de oportunidad, servicios, beneficios, paquetes, adicionales, cronograma, retorno y condiciones. */
+/* Contenido de la propuesta: textos de oportunidad, servicios, beneficios, paquetes, adicionales y cronograma. */
 "use strict";
 
 const OPP = [
@@ -308,7 +308,7 @@ const CMP = [
   ["Rondas de revisión", "1", "2", "3"],
   ["Capacitación", "Instrucciones escritas", "1 hora", "2 horas"],
   ["Precio estimado", "S/ 1,200 – 2,000", "S/ 2,800 – 4,500", "S/ 6,000 – 12,000"],
-  ["Plazo estimado", "2 – 3 semanas", "4 – 6 semanas", "8 – 12 semanas"],
+  ["Plazo estimado", "3 – 4 semanas", "6 – 8 semanas", "10 – 14 semanas"],
 ];
 
 const ADD = [
@@ -443,91 +443,16 @@ const ADD = [
 const CT = { u: ["ct-u", "Único"], m: ["ct-m", "Recurrente"], v: ["ct-v", "Variable"] };
 
 const GANTT = [
-  ["Reunión inicial y recopilación", 0, 1, "both"],
-  ["Definición del alcance", 1, 2, "both"],
-  ["Preparación de contenidos", 3, 5, "cl"],
-  ["Diseño visual", 6, 5, "pro"],
-  ["Desarrollo", 11, 8, "pro"],
-  ["Carga de productos", 17, 3, "pro"],
-  ["Revisión del cliente", 20, 2, "cl"],
-  ["Correcciones acordadas", 22, 3, "pro"],
-  ["Pruebas", 25, 2, "pro"],
-  ["Publicación y entrega", 27, 1, "both"],
+  ["Reunión inicial y recopilación", 0, 2, "both"],
+  ["Definición del alcance", 2, 3, "both"],
+  ["Preparación de contenidos", 5, 7, "cl"],
+  ["Diseño visual", 9, 7, "pro"],
+  ["Desarrollo", 16, 10, "pro"],
+  ["Carga de productos", 23, 5, "pro"],
+  ["Revisión del cliente", 28, 3, "cl"],
+  ["Correcciones acordadas", 31, 4, "pro"],
+  ["Pruebas", 35, 3, "pro"],
+  ["Publicación y entrega", 38, 2, "both"],
 ];
 
-const GMAX = 30;
-
-const RI = [
-  { k: "q", label: "Consultas por la web al mes", min: 0, max: 100, step: 1, v: 20, f: (v) => v },
-  {
-    k: "c",
-    label: "Consultas que se convierten en venta",
-    min: 0,
-    max: 60,
-    step: 1,
-    v: 20,
-    f: (v) => v + " %",
-  },
-  {
-    k: "t",
-    label: "Venta promedio por pedido",
-    min: 100,
-    max: 5000,
-    step: 50,
-    v: 800,
-    f: (v) => money(v),
-  },
-  { k: "m", label: "Margen de contribución", min: 5, max: 60, step: 1, v: 25, f: (v) => v + " %" },
-  {
-    k: "h",
-    label: "Horas ahorradas al mes en consultas",
-    min: 0,
-    max: 40,
-    step: 1,
-    v: 5,
-    f: (v) => v + " h",
-  },
-  {
-    k: "w",
-    label: "Valor de una hora de trabajo",
-    min: 5,
-    max: 60,
-    step: 1,
-    v: 15,
-    f: (v) => money(v),
-  },
-];
-
-const COND = [
-  ["Alcance contratado", "Paquete y servicios adicionales elegidos", "[ALCANCE]"],
-  ["Revisiones incluidas", "Según paquete; las adicionales se cotizan", "[N.º DE REVISIONES]"],
-  ["Forma de pago", "Transferencia, depósito o billetera digital", "[FORMA DE PAGO]"],
-  ["Anticipo", "Por ejemplo, 50 % al aprobar y 50 % a la entrega", "[PORCENTAJE]"],
-  ["Fecha estimada de entrega", "Contada desde la entrega completa de contenidos", "[FECHA]"],
-  [
-    "Contenidos",
-    "La empresa entrega fotos, productos, medidas y precios autorizados, con derecho a usarlos",
-    "[FECHA LÍMITE]",
-  ],
-  ["Costos adicionales", "Todo trabajo fuera del alcance se cotiza y aprueba antes", "[CONDICIÓN]"],
-  ["Entrega de archivos", "Accesos y archivos al cancelar el total", "[CONDICIÓN]"],
-  ["Dominio y hosting", "A nombre de la empresa; costos a su cargo", "[TITULAR / PROVEEDOR]"],
-  ["Mantenimiento", "Opcional, con alcance y precio mensual definidos", "[SÍ / NO]"],
-  [
-    "Garantía de corrección",
-    "Fallas del desarrollo se corrigen sin costo por un período",
-    "[N.º DE DÍAS]",
-  ],
-  [
-    "Modificaciones posteriores",
-    "Cambios tras la aprobación final se cotizan aparte",
-    "[CONDICIÓN]",
-  ],
-  [
-    "Tratamiento de datos",
-    "Los datos de clientes son de la empresa; conforme a la Ley N.º 29733, con aviso de privacidad",
-    "[CONDICIÓN]",
-  ],
-  ["Cancelación", "Qué pasa con el anticipo y el avance si se cancela", "[CONDICIÓN]"],
-  ["Aprobación final", "Usted revisa y aprueba antes de publicar", "[CONDICIÓN]"],
-];
+const GMAX = 40;

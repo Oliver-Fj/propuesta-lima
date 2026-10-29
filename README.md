@@ -2,7 +2,9 @@
 
 Propuesta comercial interactiva para el desarrollo de la página web de **Grupo Forestal Lima JL S.A.C.** (RUC 20612306720).
 
-Incluye una maqueta navegable del sitio (computadora y celular), los servicios, beneficios, paquetes, una calculadora de presupuesto, el retorno de la inversión, las condiciones y un formulario de aprobación.
+Incluye una maqueta navegable del sitio (computadora y celular), los servicios, beneficios, paquetes, una calculadora de presupuesto, el cronograma y un formulario de aprobación.
+
+Propuesta presentada por [@oliver](https://github.com/Oliver-Fj).
 
 Es un sitio estático: HTML, CSS y JavaScript, sin frameworks ni proceso de compilación.
 
@@ -22,7 +24,7 @@ Es un sitio estático: HTML, CSS y JavaScript, sin frameworks ni proceso de comp
 │   ├── illustrations.js  Dibujos en canvas de puertas, maderas y muebles
 │   ├── mockup.js         Navegación y vistas de la maqueta
 │   ├── content.js        Textos de servicios, beneficios, paquetes, cronograma, etc.
-│   └── proposal.js       Secciones, calculadora, retorno de la inversión y aprobación
+│   └── proposal.js       Secciones, calculadora y aprobación
 ├── assets/
 │   ├── favicon.svg
 │   ├── logo-original.png         Logo actual (baja resolución)
@@ -44,7 +46,7 @@ Los scripts se cargan con `defer` y en este orden: `config` → `utils` → `bra
 | Botón «Enviar por WhatsApp» en la aprobación | `js/config.js` → `CONFIG.miWhatsapp` (ej. `"51987654321"`) |
 | Precios de paquetes, logotipo, adicionales y mensualidades | `js/config.js` → `PKG`, `LOGO`, `ADDONS`, `YEARLY`, `MONTHLY` |
 | Productos, especies y fichas de la maqueta | `js/catalog.js` |
-| Textos de servicios, beneficios, condiciones, cronograma | `js/content.js` |
+| Textos de servicios, beneficios, cronograma | `js/content.js` |
 | Paleta y tipografías de la marca | `js/brand.js` y los bloques `:root` de `css/styles.css` y `.site` de `css/mockup.css` |
 
 Los textos entre corchetes, como `[DIRECCIÓN]`, son datos pendientes.
